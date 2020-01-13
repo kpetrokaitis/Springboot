@@ -24,7 +24,7 @@ public interface UserRepository extends JpaRepository<User, Long>  {
 	
 	@Query("select u from User u where first_name like %?1%")
 	
-	List<User> findAllByFirstname(String firstname, Pageable page);
+	List<User> findByFirstname(String firstname, Pageable page);
 	
 	Boolean existsByUsername(String username);
 	

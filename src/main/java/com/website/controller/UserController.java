@@ -55,11 +55,10 @@ public class UserController {
 	@GetMapping("/users") 
 	@PreAuthorize("hasRole('USER')")
 	public UsersList getUsersList(@RequestParam Optional<String> firstname,
-								  @RequestParam Optional<String> lastname,
 								  @RequestParam Optional<Integer> page, 
 								  @RequestParam Optional<String> sortBy) {
 		Pageable fiveElementsPage = PageRequest.of(page.orElse(0), 5, Sort.by(sortBy.orElse("id")).ascending());
-		UsersList usersList = new UsersList(userRepository.findAllByFirstname(firstname.orElse("_"), fiveElementsPage));
+		UsersList usersList = new UsersList(userRepository.findByFirstname(firstname.orElse("_"), fiveElementsPage));
 		return usersList;
 	}
 	
